@@ -10,9 +10,12 @@
 namespace graph {
 template <class Vertex>
 class UndirectedGraph : public Graph<Vertex> {
+ protected:
+  using Super = Graph<Vertex>;
+
  public:
-  using Vertices = typename Graph<Vertex>::Vertices;
-  using AdjacencyList = typename Graph<Vertex>::AdjacencyList;
+  using Vertices = typename Super::Vertices;
+  using AdjacencyList = typename Super::AdjacencyList;
 
  protected:
   AdjacencyList adjacency_list_;

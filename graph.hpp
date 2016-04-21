@@ -18,10 +18,12 @@ class Graph {
  protected:
   Vertices vertices_;
 
-  static auto _getNeighbors(const Vertex& v, const AdjacencyList& list)
-    -> const Vertices&;
-  static auto _removeVertexAdjacencyList(const Vertex& v, AdjacencyList& list)
-    -> void;
+  static auto _getNeighbors(const Vertex& v,
+                            const AdjacencyList& list) -> const Vertices&;
+  static auto _removeVertexAdjacencyList(const Vertex& v,
+                                         AdjacencyList& list) -> void;
+  static auto _existEdge(const Vertex& v, const Vertex u,
+                         const AdjacencyList& list) -> bool;
 
  public:
   Graph() = default;
