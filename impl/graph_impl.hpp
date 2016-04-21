@@ -35,8 +35,8 @@ auto Graph<Vertex>::_removeVertexAdjacencyList(
 template <class Vertex>
 auto Graph<Vertex>::_existEdge(const Vertex& v, const Vertex& u,
                                const AdjacencyList& list) -> bool {
-  auto pos = this->list.find(v);
-  if(pos == this->list.cend()) return false;
+  auto pos = list.find(v);
+  if(pos == list.cend()) return false;
   return pos->count(u);
 }
 
