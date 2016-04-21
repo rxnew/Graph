@@ -11,8 +11,8 @@ namespace graph {
 template <class Vertex>
 class DirectedGraph : public Graph<Vertex> {
  public:
-  using Graph<Vertex>::Vertices;
-  using Graph<Vertex>::AdjacencyList;
+  using Vertices = typename Graph<Vertex>::Vertices;
+  using AdjacencyList = typename Graph<Vertex>::AdjacencyList;
 
  protected:
   AdjacencyList next_;

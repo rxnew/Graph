@@ -9,21 +9,12 @@ inline UndirectedGraph<Vertex>::UndirectedGraph(size_t size)
 template <class Vertex>
 inline UndirectedGraph<Vertex>::UndirectedGraph(const Vertices& vertices)
   : Graph<Vertex>(vertices), adjacency_list_(vertices.size()) {
-  this->_initAdjacencyList();
 }
 
 template <class Vertex>
 inline UndirectedGraph<Vertex>::UndirectedGraph(Vertices&& vertices)
   : Graph<Vertex>(std::move(vertices)),
     adjacency_list_(this->vertices_.size()) {
-  this->_initAdjacencyList();
-}
-
-template <class Vertex>
-auto UndirectedGraph<Vertex>::_initAdjacencyList() -> void {
-  for(const auto& v : this->vertices_) {
-    this->adjacency_list_.emplace(v, Vertices());
-  }
 }
 
 template <class Vertex>

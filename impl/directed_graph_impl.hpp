@@ -2,14 +2,6 @@
 
 namespace dag {
 template <class Vertex>
-auto DirectedGraph<Vertex>::_initAdjacencyList() -> void {
-  for(const auto& v : this->vertices_) {
-    this->next_.emplace(v, Vertices());
-    this->prev_.emplace(v, Vertices());
-  }
-}
-
-template <class Vertex>
 inline DirectedGraph<Vertex>::DirectedGraph(size_t size)
   : Graph<Vertex>(size), next_(size), prev_(size) {
 }
@@ -17,7 +9,6 @@ inline DirectedGraph<Vertex>::DirectedGraph(size_t size)
 template <class Vertex>
 inline DirectedGraph<Vertex>::DirectedGraph(const Vertices& vertices)
   : Graph<Vertex>(vertices), next_(vertices.size()), prev_(vertices.size()) {
-  this->_initAdjacencyList();
 }
 
 template <class Vertex>
@@ -25,7 +16,6 @@ inline DirectedGraph<Vertex>::DirectedGraph(Vertices&& vertices)
   : Graph<Vertex>(std::move(vertices)),
     next_(this->vertices_.size()),
     prev_(this->vertices_.size()) {
-  this->_initAdjacencyList();
 }
 
 template <class Vertex>
