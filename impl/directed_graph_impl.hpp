@@ -1,6 +1,6 @@
 #pragma once
 
-namespace dag {
+namespace graph {
 template <class Vertex>
 inline DirectedGraph<Vertex>::DirectedGraph(size_t size)
   : Super(size), next_(size), prev_(size) {
