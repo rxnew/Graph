@@ -47,7 +47,7 @@ inline auto Graph<Vertex>::getVertices() const -> const Vertices& {
 
 template <class Vertex>
 inline auto Graph<Vertex>::getSize() const -> size_t {
-  return this->vertices.size();
+  return this->vertices_.size();
 }
 
 template <class Vertex>
