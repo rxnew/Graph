@@ -29,6 +29,9 @@ class UndirectedGraph : public Graph<Vertex> {
   UndirectedGraph(UndirectedGraph&&) noexcept = default;
   virtual ~UndirectedGraph() = default;
 
+  auto operator=(const UndirectedGraph&) -> UndirectedGraph& = default;
+  auto operator=(UndirectedGraph&&) -> UndirectedGraph& = default;
+
   auto getNeighbors(const Vertex& v) const -> const Vertices&;
   auto getDegree(const Vertex& v) const -> size_t;
   auto addVertex(const Vertex& v) -> void;

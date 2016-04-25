@@ -34,6 +34,9 @@ class Graph {
   Graph(Graph&&) noexcept = default;
   virtual ~Graph() = default;
 
+  auto operator=(const Graph&) -> Graph& = default;
+  auto operator=(Graph&&) -> Graph& = default;
+
   auto getVertices() const -> const Vertices&;
   auto getSize() const -> size_t;
   virtual auto getNeighbors(const Vertex& v) const -> const Vertices& = 0;

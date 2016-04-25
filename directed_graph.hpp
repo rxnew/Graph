@@ -30,6 +30,9 @@ class DirectedGraph : public Graph<Vertex> {
   DirectedGraph(DirectedGraph&&) noexcept = default;
   virtual ~DirectedGraph() = default;
 
+  auto operator=(const DirectedGraph&) -> DirectedGraph& = default;
+  auto operator=(DirectedGraph&&) -> DirectedGraph& = default;
+
   auto getSourceVertices() const -> Vertices;
   auto getSinkVertices() const -> Vertices;
   auto getNeighbors(const Vertex& v) const -> const Vertices&;
