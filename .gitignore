@@ -8,6 +8,4 @@ GPATH
 GRTAGS
 GSYMS
 GTAGS
-/build/*
 !.gitkeep
-!/lib/*.a
