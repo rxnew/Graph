@@ -17,10 +17,6 @@ class UndirectedGraph : public Graph<Vertex> {
   using Vertices = typename Super::Vertices;
   using AdjacencyList = typename Super::AdjacencyList;
 
- protected:
-  AdjacencyList adjacency_list_;
-
- public:
   UndirectedGraph() = default;
   explicit UndirectedGraph(size_t size);
   explicit UndirectedGraph(const Vertices& vertices);
@@ -32,14 +28,18 @@ class UndirectedGraph : public Graph<Vertex> {
   auto operator=(const UndirectedGraph&) -> UndirectedGraph& = default;
   auto operator=(UndirectedGraph&&) -> UndirectedGraph& = default;
 
-  auto getNeighbors(const Vertex& v) const -> const Vertices&;
-  auto getDegree(const Vertex& v) const -> size_t;
-  auto addVertex(const Vertex& v) -> void;
-  auto removeVertex(const Vertex& v) -> void;
-  auto addEdge(const Vertex& v, const Vertex& u) -> void;
-  auto removeEdge(const Vertex& v, const Vertex& u) -> void;
-  auto existEdge(const Vertex& v, const Vertex& u) const -> bool;
+  virtual auto get_neighbors(const Vertex& v) const -> const Vertices& final;
+  virtual auto add_vertex(const Vertex& v) -> void override;
+  virtual auto remove_vertex(const Vertex& v) -> void override;
+  virtual auto add_edge(const Vertex& v, const Vertex& u) -> void override;
+  virtual auto remove_edge(const Vertex& v, const Vertex& u) -> void override;
+  virtual auto exist_edge(const Vertex& v, const Vertex& u) const
+    -> bool override;
+  virtual auto get_degree(const Vertex& v) const -> size_t override;
+
+ protected:
+  AdjacencyList adjacency_list_;
 };
 }
 
-#include "impl/undirected_graph_impl.hpp"
+#include "undirected_graph/undirected_graph_impl.hpp"

@@ -15,16 +15,6 @@ class Graph {
   using Vertices = std::unordered_set<Vertex>;
   using AdjacencyList = std::unordered_map<Vertex, Vertices>;
 
- protected:
-  Vertices vertices_;
-
-  static auto _getNeighbors(const Vertex& v,
-                            const AdjacencyList& list) -> const Vertices&;
-  static auto _removeVertexAdjacencyList(const Vertex& v,
-                                         AdjacencyList& list) -> void;
-  static auto _existEdge(const Vertex& v, const Vertex& u,
-                         const AdjacencyList& list) -> bool;
-
  public:
   Graph() = default;
   explicit Graph(size_t size);
@@ -37,15 +27,30 @@ class Graph {
   auto operator=(const Graph&) -> Graph& = default;
   auto operator=(Graph&&) -> Graph& = default;
 
-  auto getVertices() const -> const Vertices&;
-  auto getSize() const -> size_t;
-  virtual auto getNeighbors(const Vertex& v) const -> const Vertices& = 0;
-  virtual auto addVertex(const Vertex& v) -> void;
-  virtual auto removeVertex(const Vertex& v) -> void;
-  virtual auto addEdge(const Vertex& v, const Vertex& u) -> void = 0;
-  virtual auto removeEdge(const Vertex& v, const Vertex& u) -> void = 0;
-  virtual auto existEdge(const Vertex& v, const Vertex& u) const -> bool = 0;
+  auto get_vertices() const -> const Vertices&;
+  auto get_size() const -> size_t;
+  virtual auto get_neighbors(const Vertex& v) const -> const Vertices& = 0;
+  virtual auto add_vertex(const Vertex& v) -> void;
+  template <template <class...> class Container>
+  virtual auto add_vertex(const Container<Vertex>& vertices) -> void;
+  virtual auto remove_vertex(const Vertex& v) -> void;
+  template <template <class...> class Container>
+  virtual auto remove_vertex(const Container<Vertex>& vertices) -> void;
+  virtual auto add_edge(const Vertex& v, const Vertex& u) -> void = 0;
+  virtual auto remove_edge(const Vertex& v, const Vertex& u) -> void = 0;
+  virtual auto exist_edge(const Vertex& v, const Vertex& u) const -> bool = 0;
+  virtual auto get_degree(const Vertex& v) const -> size_t = 0;
+  virtual auto is_isolated_vertex(const Vertex& v) const -> bool;
+
+ protected:
+  Vertices vertices_;
+
+  static auto _get_neighbors(const Vertex& v, const AdjacencyList& list)
+    -> const Vertices&;
+  static auto _remove_vertex(const Vertex& v, AdjacencyList& list) -> void;
+  static auto _exist_edge(const Vertex& v, const Vertex& u,
+                          const AdjacencyList& list) -> bool;
 };
 }
 
-#include "impl/graph_impl.hpp"
+#include "graph/graph_impl.hpp"

@@ -17,11 +17,6 @@ class DirectedGraph : public Graph<Vertex> {
   using Vertices = typename Super::Vertices;
   using AdjacencyList = typename Super::AdjacencyList;
 
- protected:
-  AdjacencyList next_;
-  AdjacencyList prev_;
-
- public:
   DirectedGraph() = default;
   explicit DirectedGraph(size_t size);
   explicit DirectedGraph(const Vertices& vertices);
@@ -31,21 +26,29 @@ class DirectedGraph : public Graph<Vertex> {
   virtual ~DirectedGraph() = default;
 
   auto operator=(const DirectedGraph&) -> DirectedGraph& = default;
-  auto operator=(DirectedGraph&&) -> DirectedGraph& = default;
+  auto operator=(DirectedGraph&&) noexcept -> DirectedGraph& = default;
 
-  auto getSourceVertices() const -> Vertices;
-  auto getSinkVertices() const -> Vertices;
-  auto getNeighbors(const Vertex& v) const -> const Vertices&;
-  auto getNextVertices(const Vertex& v) const -> const Vertices&;
-  auto getPrevVertices(const Vertex& v) const -> const Vertices&;
-  auto getOutdegree(const Vertex& v) const -> size_t;
-  auto getIndegree(const Vertex& v) const -> size_t;
-  auto addVertex(const Vertex& v) -> void;
-  auto removeVertex(const Vertex& v) -> void;
-  auto addEdge(const Vertex& v, const Vertex& u) -> void;
-  auto removeEdge(const Vertex& v, const Vertex& u) -> void;
-  auto existEdge(const Vertex& v, const Vertex& u) const -> bool;
+  virtual auto get_neighbors(const Vertex& v) const -> const Vertices& final;
+  virtual auto add_vertex(const Vertex& v) -> void override;
+  virtual auto remove_vertex(const Vertex& v) -> void override;
+  virtual auto add_edge(const Vertex& v, const Vertex& u) -> void override;
+  virtual auto remove_edge(const Vertex& v, const Vertex& u) -> void override;
+  virtual auto exist_edge(const Vertex& v, const Vertex& u) const
+    -> bool override;
+  virtual auto get_degree(const Vertex& v) const -> size_t override;
+  virtual auto collect_source_vertices() const -> Vertices;
+  virtual auto collect_sink_vertices() const -> Vertices;
+  auto is_source_vertex(const Vertex& v) const -> bool;
+  auto is_sink_vertex(const Vertex& v) const -> bool;
+  auto get_next_vertices(const Vertex& v) const -> const Vertices&;
+  auto get_prev_vertices(const Vertex& v) const -> const Vertices&;
+  auto get_outdegree(const Vertex& v) const -> size_t;
+  auto get_indegree(const Vertex& v) const -> size_t;
+
+ protected:
+  AdjacencyList next_;
+  AdjacencyList prev_;
 };
 }
 
-#include "impl/directed_graph_impl.hpp"
+#include "directed_graph/directed_graph_impl.hpp"
