@@ -18,7 +18,9 @@ class DependencyGraph : public DirectedGraph<Vertex> {
   using Super = DirectedGraph<Vertex>;
 
  public:
-  class Manager;
+  using VertexType = Vertex;
+  using Vertices = typename Super::Vertices;
+  using AdjacencyList = typename Super::AdjacencyList;
 
   explicit DependencyGraph(const Dependency& dependency = Dependency(),
                            const Hash& hash = Hash());
@@ -47,7 +49,7 @@ class DependencyGraph : public DirectedGraph<Vertex> {
   Dependency dependency_;
   Hash hash_;
   Vertices sources_;
-  Footprints<Vertex, Hash> footprints_;
+  util::Footprints<Vertex, Hash> footprints_;
 
   virtual auto add_edge(const Vertex& v, const Vertex& u) -> void final;
   virtual auto remove_edge(const Vertex& v, const Vertex& u) -> void final;

@@ -8,6 +8,7 @@
 #include <unordered_set>
 
 namespace graph {
+namespace util {
 template <class T, class Hash>
 class Footprints {
  private:
@@ -26,6 +27,7 @@ class Footprints {
   auto leave(const T& x) -> void;
   auto exist(const T& x) const -> bool;
 };
+}
 }
 
 #include "footprints/footprints_impl.hpp"

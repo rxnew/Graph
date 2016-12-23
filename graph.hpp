@@ -12,6 +12,7 @@ namespace graph {
 template <class Vertex>
 class Graph {
  public:
+  using Vertex;
   using Vertices = std::unordered_set<Vertex>;
   using AdjacencyList = std::unordered_map<Vertex, Vertices>;
 
@@ -29,6 +30,7 @@ class Graph {
 
   auto get_vertices() const -> const Vertices&;
   auto get_size() const -> size_t;
+  auto is_empty() const -> bool;
   virtual auto get_neighbors(const Vertex& v) const -> const Vertices& = 0;
   virtual auto add_vertex(const Vertex& v) -> void;
   template <template <class...> class Container>

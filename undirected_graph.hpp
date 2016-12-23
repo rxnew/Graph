@@ -14,6 +14,7 @@ class UndirectedGraph : public Graph<Vertex> {
   using Super = Graph<Vertex>;
 
  public:
+  using Vertex;
   using Vertices = typename Super::Vertices;
   using AdjacencyList = typename Super::AdjacencyList;
 

@@ -25,6 +25,11 @@ inline auto Graph<Vertex>::get_size() const -> size_t {
 }
 
 template <class Vertex>
+inline auto Graph<Vertex>::is_empty() const -> bool {
+  return vertices_.empty();
+}
+
+template <class Vertex>
 inline auto Graph<Vertex>::add_vertex(const Vertex& v) -> void {
   vertices_.insert(v);
 }

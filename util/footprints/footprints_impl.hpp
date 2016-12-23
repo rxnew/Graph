@@ -1,4 +1,5 @@
-namespace dep {
+namespace graph {
+namespace util {
 template <class T, class Hash>
 inline auto Footprints<T, Hash>::clear() -> void {
   this->footprints_.clear();
@@ -12,5 +13,6 @@ inline auto Footprints<T, Hash>::leave(const T& x) -> void {
 template <class T, class Hash>
 inline auto Footprints<T, Hash>::exist(const T& x) const -> bool {
   return this->footprints_.cend() != this->footprints_.find(x);
+}
 }
 }
