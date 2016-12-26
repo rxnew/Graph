@@ -56,6 +56,11 @@ auto Graph<Vertex>::remove_vertex(const Container<Vertex>& vertices) -> void {
 }
 
 template <class Vertex>
+inline auto Graph<Vertex>::is_isolated_vertex(const Vertex& v) const -> bool {
+  return get_degree(v) == 0;
+}
+
+template <class Vertex>
 auto Graph<Vertex>::_get_neighbors(const Vertex& v, const AdjacencyList& list)
   -> const Vertices& {
   static const Vertices empty_vertices;
@@ -78,10 +83,5 @@ auto Graph<Vertex>::_exist_edge(const Vertex& v, const Vertex& u,
   auto pos = list.find(v);
   if(pos == list.cend()) return false;
   return pos->second.count(u);
-}
-
-template <class Vertex>
-inline auto Graph<Vertex>::is_isolated_vertex(const Vertex& v) const -> bool {
-  return get_degree(v) == 0;
 }
 }

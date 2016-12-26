@@ -2,7 +2,7 @@
 
 #include <cassert>
 
-#include "../../util/set.hpp"
+#include "../../../util/set.hpp"
 
 namespace graph {
 inline namespace algorithm {
@@ -70,7 +70,8 @@ _solve(const Graph& g, Vertices&& r, Vertices&& p, Vertices&& x) -> void {
 }
 
 template <class Graph>
-inline auto bron_kerbosch_pivot(const Graph& g) -> BronKerboschPivot::Cliques {
+inline auto bron_kerbosch_pivot(const Graph& g)
+  -> typename BronKerboschPivot<Graph>::Cliques {
   return BronKerboschPivot<Graph>().solve(g);
 }
 }

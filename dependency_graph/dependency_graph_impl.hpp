@@ -26,14 +26,14 @@ auto DependencyGraph<Vertex, Dependency, Hash>::
 add_vertex(const Vertex& v) -> void {
   Super::add_vertex(v);
   footprints_.clear();
-  if(sources_.empty()) {
-    sources_.insert(v);
+  if(independent_vertices_.empty()) {
+    independent_vertices_.insert(v);
     return;
   }
-  for(const auto& source : sources_) {
+  for(const auto& source : independent_vertices_) {
     _add_vertex(v, source);
   }
-  if(is_source_vertex(v)) sources_.insert(v);
+  if(is_source_vertex(v)) independent_vertices_.insert(v);
 }
 
 template <class Vertex, class Dependency, class Hash>
@@ -43,9 +43,22 @@ remove_vertex(const Vertex& v) -> void {
   const auto& next_vertices = get_next_vertices(v);
   Super::remove_vertex(v);
   if(!update_source_flag) return;
+  independent_vertices_.erase(v);
   for(const auto& u : next_vertices) {
-    if(is_source_vertex(u)) sources_.insert(u);
+    if(is_source_vertex(u)) independent_vertices_.insert(u);
   }
+}
+
+template <class Vertex, class Dependency, class Hash>
+auto DependencyGraph<Vertex, Dependency, Hash>::
+collect_source_vertices() const -> Vertices {
+  return get_independent_vertices();
+}
+
+template <class Vertex, class Dependency, class Hash>
+auto DependencyGraph<Vertex, Dependency, Hash>::
+get_independent_vertices() const -> const Vertices& {
+  return independent_vertices_;
 }
 
 template <class Vertex, class Dependency, class Hash>

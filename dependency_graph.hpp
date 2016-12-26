@@ -5,20 +5,20 @@
 
 #pragma once
 
-#include "graph.hpp"
+#include "directed_graph.hpp"
 #include "dependency_graph/dependencies.hpp"
 #include "util/footprints.hpp"
 
 namespace graph {
-template <class Vertex,
-          class Dependency = dependencies::Default<Vertex>,
-          class Hash = std::hash<Vertex>>
-class DependencyGraph : public DirectedGraph<Vertex> {
+template <class V,
+          class Dependency = dependencies::Default<V>,
+          class Hash = std::hash<V>>
+class DependencyGraph : public DirectedGraph<V> {
  protected:
-  using Super = DirectedGraph<Vertex>;
+  using Super = DirectedGraph<V>;
 
  public:
-  using VertexType = Vertex;
+  using Vertex = V;
   using Vertices = typename Super::Vertices;
   using AdjacencyList = typename Super::AdjacencyList;
 
@@ -40,7 +40,7 @@ class DependencyGraph : public DirectedGraph<Vertex> {
   virtual auto add_vertex(const Vertex& v) -> void final;
   virtual auto remove_vertex(const Vertex& v) -> void final;
   virtual auto collect_source_vertices() const -> Vertices;
-  auto get_source_vertices() const -> const Vertices&;
+  auto get_independent_vertices() const -> const Vertices&;
   auto count_dependent_vertices(const Vertex& v) const -> int;
   template <template <class...> class Container>
   auto count_dependent_vertices(const Container<Vertex>& vertices) const -> int;
@@ -48,12 +48,12 @@ class DependencyGraph : public DirectedGraph<Vertex> {
  protected:
   Dependency dependency_;
   Hash hash_;
-  Vertices sources_;
+  Vertices independent_vertices_;
   util::Footprints<Vertex, Hash> footprints_;
 
   virtual auto add_edge(const Vertex& v, const Vertex& u) -> void final;
   virtual auto remove_edge(const Vertex& v, const Vertex& u) -> void final;
-  auto _add_vertex(const Vertex& v, const Vertex& pos) const -> bool;
+  auto _add_vertex(const Vertex& v, const Vertex& pos) -> bool;
   template <template <class...> class Container>
   auto _count_dependent_vertices(const Container<Vertex>& vertices) const
     -> int;

@@ -8,13 +8,13 @@
 #include "graph.hpp"
 
 namespace graph {
-template <class Vertex>
-class DirectedGraph : public Graph<Vertex> {
+template <class V>
+class DirectedGraph : public Graph<V> {
  protected:
-  using Super = Graph<Vertex>;
+  using Super = Graph<V>;
 
  public:
-  using Vertex;
+  using Vertex = V;
   using Vertices = typename Super::Vertices;
   using AdjacencyList = typename Super::AdjacencyList;
 

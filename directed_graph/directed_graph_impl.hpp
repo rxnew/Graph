@@ -14,8 +14,8 @@ inline DirectedGraph<Vertex>::DirectedGraph(const Vertices& vertices)
 template <class Vertex>
 inline DirectedGraph<Vertex>::DirectedGraph(Vertices&& vertices)
   : Super(std::move(vertices)),
-    next_(vertices_.size()),
-    prev_(vertices_.size()) {
+    next_(this->vertices_.size()),
+    prev_(this->vertices_.size()) {
 }
 
 template <class Vertex>
@@ -67,7 +67,7 @@ inline auto DirectedGraph<Vertex>::get_degree(const Vertex& v) const
 template <class Vertex>
 auto DirectedGraph<Vertex>::collect_source_vertices() const -> Vertices {
   Vertices source_vertices;
-  for(const auto& v : vertices_) {
+  for(const auto& v : this->vertices_) {
     if(!get_indegree(v)) source_vertices.insert(v);
   }
   return std::move(source_vertices);
@@ -76,7 +76,7 @@ auto DirectedGraph<Vertex>::collect_source_vertices() const -> Vertices {
 template <class Vertex>
 auto DirectedGraph<Vertex>::collect_sink_vertices() const -> Vertices {
   Vertices sink_vertices;
-  for(const auto& v : vertices_) {
+  for(const auto& v : this->vertices_) {
     if(!get_outdegree(v)) sink_vertices.insert(v);
   }
   return std::move(sink_vertices);

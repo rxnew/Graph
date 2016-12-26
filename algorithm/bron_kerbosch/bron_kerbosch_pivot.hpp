@@ -7,14 +7,16 @@
 
 #include <list>
 
+#include "../../undirected_graph.hpp"
+
 namespace graph {
 inline namespace algorithm {
 template <class Graph>
 class BronKerboschPivot {
  public:
-  using Graph;
-  using Vertex = Graph::Vertex;
-  using Vertices = Graph::Vertices;
+  //using Graph;
+  using Vertex = typename Graph::Vertex;
+  using Vertices = typename Graph::Vertices;
   using Cliques = std::list<Vertices>;
 
   BronKerboschPivot() = default;
@@ -33,7 +35,8 @@ class BronKerboschPivot {
 };
 
 template <class Graph>
-auto bron_kerbosch_pivot(const Graph& g) -> BronKerboschPivot::Cliques;
+auto bron_kerbosch_pivot(const Graph& g)
+  -> typename BronKerboschPivot<Graph>::Cliques;
 }
 }
 

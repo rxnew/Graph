@@ -9,10 +9,10 @@
 #include <unordered_map>
 
 namespace graph {
-template <class Vertex>
+template <class V>
 class Graph {
  public:
-  using Vertex;
+  using Vertex = V;
   using Vertices = std::unordered_set<Vertex>;
   using AdjacencyList = std::unordered_map<Vertex, Vertices>;
 
@@ -34,10 +34,10 @@ class Graph {
   virtual auto get_neighbors(const Vertex& v) const -> const Vertices& = 0;
   virtual auto add_vertex(const Vertex& v) -> void;
   template <template <class...> class Container>
-  virtual auto add_vertex(const Container<Vertex>& vertices) -> void;
+  auto add_vertex(const Container<Vertex>& vertices) -> void;
   virtual auto remove_vertex(const Vertex& v) -> void;
   template <template <class...> class Container>
-  virtual auto remove_vertex(const Container<Vertex>& vertices) -> void;
+  auto remove_vertex(const Container<Vertex>& vertices) -> void;
   virtual auto add_edge(const Vertex& v, const Vertex& u) -> void = 0;
   virtual auto remove_edge(const Vertex& v, const Vertex& u) -> void = 0;
   virtual auto exist_edge(const Vertex& v, const Vertex& u) const -> bool = 0;
