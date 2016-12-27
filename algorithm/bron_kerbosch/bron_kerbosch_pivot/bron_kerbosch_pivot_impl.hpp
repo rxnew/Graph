@@ -9,13 +9,13 @@ inline namespace algorithm {
 template <class Graph>
 auto BronKerboschPivot<Graph>::solve(const Graph& g) & -> const Cliques& {
   _solve(g);
-  return cliques;
+  return cliques_;
 }
 
 template <class Graph>
 auto BronKerboschPivot<Graph>::solve(const Graph& g) && -> Cliques {
   _solve(g);
-  return std::move(cliques);
+  return std::move(cliques_);
 }
 
 template <class Graph>
@@ -38,12 +38,12 @@ auto BronKerboschPivot<Graph>::_select_pivot(const Graph& g, const Vertices& p)
 template <class Graph>
 inline auto BronKerboschPivot<Graph>::_report_maximal_clique(Vertices&& r)
   -> void {
-  cliques.push_back(std::move(r));
+  cliques_.push_back(std::move(r));
 }
 
 template <class Graph>
 auto BronKerboschPivot<Graph>::_solve(const Graph& g) -> void {
-  cliques.clear();
+  cliques_.clear();
   auto r = Vertices();
   auto p = g.get_vertices();
   auto x = Vertices();

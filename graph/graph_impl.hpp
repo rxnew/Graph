@@ -36,7 +36,7 @@ inline auto Graph<Vertex>::add_vertex(const Vertex& v) -> void {
 
 template <class Vertex>
 template <template <class...> class Container>
-auto Graph<Vertex>::add_vertex(const Container<Vertex>& vertices) -> void {
+auto Graph<Vertex>::add_vertices(const Container<Vertex>& vertices) -> void {
   for(const auto& v : vertices) {
     add_vertex(v);
   }
@@ -49,7 +49,7 @@ inline auto Graph<Vertex>::remove_vertex(const Vertex& v) -> void {
 
 template <class Vertex>
 template <template <class...> class Container>
-auto Graph<Vertex>::remove_vertex(const Container<Vertex>& vertices) -> void {
+auto Graph<Vertex>::remove_vertices(const Container<Vertex>& vertices) -> void {
   for(const auto& v : vertices) {
     remove_vertex(v);
   }

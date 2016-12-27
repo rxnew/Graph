@@ -31,7 +31,7 @@ class BronKerboschPivot {
   auto _solve(const Graph& g) -> void;
   auto _solve(const Graph& g, Vertices&& r, Vertices&& p, Vertices&& x) -> void;
 
-  Cliques cliques;
+  Cliques cliques_;
 };
 
 template <class Graph>

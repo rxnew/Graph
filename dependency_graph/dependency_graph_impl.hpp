@@ -33,19 +33,19 @@ add_vertex(const Vertex& v) -> void {
   for(const auto& source : independent_vertices_) {
     _add_vertex(v, source);
   }
-  if(is_source_vertex(v)) independent_vertices_.insert(v);
+  if(this->is_source_vertex(v)) independent_vertices_.insert(v);
 }
 
 template <class Vertex, class Dependency, class Hash>
 auto DependencyGraph<Vertex, Dependency, Hash>::
 remove_vertex(const Vertex& v) -> void {
-  auto update_source_flag = is_source_vertex(v);
-  const auto& next_vertices = get_next_vertices(v);
+  auto update_source_flag = this->is_source_vertex(v);
+  const auto& next_vertices = this->get_next_vertices(v);
   Super::remove_vertex(v);
   if(!update_source_flag) return;
   independent_vertices_.erase(v);
   for(const auto& u : next_vertices) {
-    if(is_source_vertex(u)) independent_vertices_.insert(u);
+    if(this->is_source_vertex(u)) independent_vertices_.insert(u);
   }
 }
 
@@ -94,7 +94,7 @@ _add_vertex(const Vertex& v, const Vertex& pos) -> bool {
   if(footprints_.exist(pos)) return false;
   footprints_.leave(pos);
   auto add_flag = false;
-  for(const auto& next : get_next_vertices(pos)) {
+  for(const auto& next : this->get_next_vertices(pos)) {
     add_flag |= _add_vertex(v, next);
   }
   if(add_flag) return true;
@@ -111,7 +111,7 @@ _count_dependent_vertices(const Container<Vertex>& vertices) const -> int {
   for(const auto& v : vertices) {
     if(footprints_.exist(v)) continue;
     footprints_.leave(v);
-    const auto& next = get_next_vertices(v);
+    const auto& next = this->get_next_vertices(v);
     count += _count_dependent_vertices(next) + next.size();
   }
   return count;

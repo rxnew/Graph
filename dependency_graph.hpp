@@ -49,7 +49,7 @@ class DependencyGraph : public DirectedGraph<V> {
   Dependency dependency_;
   Hash hash_;
   Vertices independent_vertices_;
-  util::Footprints<Vertex, Hash> footprints_;
+  mutable util::Footprints<Vertex, Hash> footprints_;
 
   virtual auto add_edge(const Vertex& v, const Vertex& u) -> void final;
   virtual auto remove_edge(const Vertex& v, const Vertex& u) -> void final;
