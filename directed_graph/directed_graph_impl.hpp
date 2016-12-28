@@ -34,8 +34,14 @@ inline auto DirectedGraph<Vertex>::add_vertex(const Vertex& v) -> void {
 template <class Vertex>
 inline auto DirectedGraph<Vertex>::remove_vertex(const Vertex& v) -> void {
   Super::remove_vertex(v);
-  Super::_remove_vertex(v, next_);
-  Super::_remove_vertex(v, prev_);
+  for(const auto& u : prev_[v]) {
+    next_[u].erase(v);
+  }
+  for(const auto& u : next_[v]) {
+    prev_[u].erase(v);
+  }
+  prev_.erase(v);
+  next_.erase(v);
 }
 
 template <class Vertex>

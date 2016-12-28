@@ -40,7 +40,7 @@ template <class Vertex, class Dependency, class Hash>
 auto DependencyGraph<Vertex, Dependency, Hash>::
 remove_vertex(const Vertex& v) -> void {
   auto update_source_flag = this->is_source_vertex(v);
-  const auto& next_vertices = this->get_next_vertices(v);
+  const auto next_vertices = this->get_next_vertices(v);
   Super::remove_vertex(v);
   if(!update_source_flag) return;
   independent_vertices_.erase(v);
