@@ -24,7 +24,7 @@ auto BronKerboschPivot<Graph>::_select_pivot(const Graph& g, const Vertices& p)
   assert(!p.empty());
 
   auto pivot = *p.begin();
-  auto max_neighbor_number = 0;
+  auto max_neighbor_number = 0u;
   for(const auto& v : p) {
     auto neighbor_number = g.get_degree(v);
     if(neighbor_number > max_neighbor_number) {
